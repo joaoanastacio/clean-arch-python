@@ -1,1 +1,29 @@
-FROM ubuntu:latest AS packaging
+FROM python:3.9-slim-buster AS compile-image
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc
+
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+RUN pip install --upgrade pip && pip install pip-tools
+COPY ./requirements.in .
+RUN pip-compile requirements.in > requirements.txt && pip-sync
+RUN pip install -r requirements.txt
+
+
+FROM python:3.9-slim-buster AS runtime-image
+
+COPY --from=compile-image /opt/venv /opt/venv
+WORKDIR /usr/src/app
+
+RUN addgroup --system user && adduser --system --no-create-home --group user
+RUN chown -R user:user /usr/src/app && chmod -R 755 /usr/src/app
+
+USER user
+
+COPY . /usr/src/app
+
+ENV PATH="/opt/venv/bin:$PATH"
+CMD python manage.py run -h 0.0.0.0
