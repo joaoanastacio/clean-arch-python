@@ -9,7 +9,6 @@ class CreditCard:
        self.__expiration_year = self.__validate_year(expiration_year)
        self.__verification_value =  self.__validate_verification_value(verification_value)
 
-
     def get_holder_name(self) -> str:
         return self.__holder_name
 
@@ -24,7 +23,6 @@ class CreditCard:
 
     def get_verification_value(self) -> int:
         return self.__verification_value
-
 
     def __validate_name(self, holder_name: str) -> str:
         if len(holder_name) < 3:

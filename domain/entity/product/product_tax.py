@@ -12,3 +12,4 @@ class ProductTax:
     
     def get_full_tax(self) -> float:
         return self.__federal_tax + self.__provincial_tax
+        

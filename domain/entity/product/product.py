@@ -7,3 +7,4 @@ class Product(Protocol):
 
     def change_customer_limit(self, new_customer_limit: int) -> None:
         ...
+        
