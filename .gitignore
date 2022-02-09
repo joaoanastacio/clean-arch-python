@@ -130,3 +130,4 @@ dmypy.json
 
 # Test class - temporarily
 main.py
+docker-compose.yml
