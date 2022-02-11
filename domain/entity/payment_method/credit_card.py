@@ -1,5 +1,7 @@
 from datetime import date
 
+from domain.exception.invalid_attribute import InvalidAttributeException
+
 class CreditCard:
 
     def __init__(self, holder_name: str, card_number: str, expiration_month: int, expiration_year: int, verification_value: int) -> None:
@@ -26,25 +28,25 @@ class CreditCard:
 
     def __validate_name(self, holder_name: str) -> str:
         if len(holder_name) < 3:
-            raise ValueError("Invalid holder name")
+            raise InvalidAttributeException("Invalid holder name")
         return holder_name
             
     def __validate_number(self, card_number: str) -> str:
         if not 0 < len(card_number) < 16:
-            raise ValueError("Invalid credit card number")
+            raise InvalidAttributeException("Invalid credit card number")
         return card_number
         
     def __validate_month(self, expiration_month: int) -> int:
         if not 1 < expiration_month < 13:
-            raise ValueError("Invalid expiration month")
+            raise InvalidAttributeException("Invalid expiration month")
         return expiration_month
 
     def __validate_year(self, expiration_year: int) -> int:
         if not expiration_year > date.today().year:
-            raise ValueError("Invalid expiration year")
+            raise InvalidAttributeException("Invalid expiration year")
         return expiration_year
 
     def __validate_verification_value(self, verification_value: int) -> int:
         if len(str(verification_value)) < 3:
-            raise ValueError("Invalid card verification number")
+            raise InvalidAttributeException("Invalid card verification number")
         return verification_value

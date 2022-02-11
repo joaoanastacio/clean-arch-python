@@ -1,4 +1,5 @@
 from datetime import datetime
+from domain.exception.customer_limit import CustomerLimitException
 
 from product_information import ProductInformation
 from product_tax import ProductTax
@@ -17,5 +18,5 @@ class DigitalProduct:
     
     def change_customer_limit(self, new_customer_limit: int) -> None:
         if new_customer_limit < 0:
-            raise ValueError("New customer limit is not valid. It must be greater or equal to zero")
+            raise CustomerLimitException("New customer limit is not valid. It must be greater or equal to zero")
         self.customer_limit = new_customer_limit

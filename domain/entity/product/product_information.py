@@ -1,3 +1,6 @@
+from domain.exception.invalid_attribute import InvalidAttributeException
+
+
 class ProductInformation:
 
     def __init__(self, product_name: str, product_description: str, product_image: str, product_price: float) -> None:
@@ -26,5 +29,5 @@ class ProductInformation:
 
     def __validate_price(self, product_price: float) -> float:
         if product_price <= 0:
-            raise ValueError("Invalid product price. It must be greater than 0")
+            raise InvalidAttributeException("Invalid product price. It must be greater than 0")
         return product_price
