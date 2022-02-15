@@ -25,6 +25,9 @@ class Transaction:
 
         return amount
 
+    def get_credit_card(self) -> CreditCard:
+        return self.__credit_card
+
     def get_transaction_status(self) -> str:
         return self.__status
 
