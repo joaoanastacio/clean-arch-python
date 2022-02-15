@@ -1,4 +1,4 @@
-# Not Completed
+# This docker compose file is used only to manage containers in development environment
 version: '3.7'
 
 services:
@@ -6,7 +6,7 @@ services:
   users:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     entrypoint: ['/usr/src/app/entrypoint.sh']
     volumes:
       - '.:/usr/src/app'
