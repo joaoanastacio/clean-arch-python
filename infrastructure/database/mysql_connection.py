@@ -1,5 +1,7 @@
 from typing_extensions import Self
 
+
+
 class MySqlConnection(object):
     
     __connection = None
