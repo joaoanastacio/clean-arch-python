@@ -13,7 +13,7 @@ class MySqlConnection:
                     "password": "clean-arch-pwd",
                     "host": "127.0.0.1",
                     "database": "clean-arch",
-                    "raise_on_warnings": True
+                    "raise_on_warnings": False
                 }
                 self.__connection =  mysql.connector.connect(**config)
 
