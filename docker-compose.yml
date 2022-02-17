@@ -2,30 +2,25 @@
 version: '3.7'
 
 services:
-
-  users:
+  transactions-backend:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    entrypoint: ['/usr/src/app/entrypoint.sh']
-    volumes:
-      - '.:/usr/src/app'
     ports:
-      - 5001:5000
+      - "5000:5000"
     environment:
       - FLASK_ENV=development
       - APP_SETTINGS=project.config.DevelopmentConfig
-      - DATABASE_URL=postgresql://postgres:postgres@users-db:5432/users_dev
-      - DATABASE_TEST_URL=postgresql://postgres:postgres@users-db:5432/users_test
     depends_on:
-      - users-db
+      - transactions-db
 
-  users-db:
-    build:
-      context: ./project/db
-      dockerfile: Dockerfile
-    expose:
-      - 5432
+  transactions-db:
+    image: mysql:8.0
+    restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - MYSQL_DATABASE='clean-arch'
+      - MYSQL_USER='clean-arch-user'
+      - MYSQL_PASSWORD='clean-arch-pwd'
+      - MYSQL_ROOT_PASSWORD='clean-arch-pwd-root'
+    ports:
+      - "3306:3306"
